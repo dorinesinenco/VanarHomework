@@ -10,4 +10,4 @@ try:
 except ValueError:
     print("Index must be an integer")
 except IndexError:
-    print("Index can't be larger than " + str(len(data)))
+    print("Index can't be larger than " + str(len(data)-1))
