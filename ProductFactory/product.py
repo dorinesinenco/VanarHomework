@@ -1,25 +1,35 @@
 class _Product():
-    def __init__(self, name, price, quantity):
-        self.name = name
-        self.price = price
-        self.quantity = quantity
+    pass
+    # def __str__(self):
+    #     return f"{self.name} {self.price} {self.quantity}"
+
+# funcția care primește ca argument un tuple
+# def new_product(name, price, quantity):
+#     _newz = _Product()
+#     _newz.name = name
+#     _newz.price = price
+#     _newz.quantity = quantity
+#     return _newz
 
 
-def new_product(name, price, quantity):
-    return _Product(name, price, quantity)
+# funcția care primește ca argument un dicționar
+def new_product(dict_prod):
+    _newz = _Product()
+    _newz.name = dict_prod["name"]
+    _newz.price = dict_prod["price"]
+    _newz.quantity = dict_prod["quantity"]
+    return _newz
 
 
-def print_product(new_p):
+def print_product(_newp):
     print(
-        f'avem {new_p.quantity} {new_p.name} cu prețul de {new_p.price} Lei per bucată.')
+        f'avem {_newp.quantity} {_newp.name} cu prețul de {_newp.price} Lei per bucată.')
 
 
-def compare_products(x, y):
-    if x.price > y.price:
-        print(f'Produsul {y.name} este mai ieftin')
-    elif x.price < y.price:
-        print(f'Produsul {x.name} este mai ieftin')
+def compare_products(_x, _y):
+    if _x.price > _y.price:
+        print(f'Produsul {_y.name} este mai ieftin')
+    elif _x.price < _y.price:
+        print(f'Produsul {_x.name} este mai ieftin')
     else:
-        print(f'Produsele {x.name} și {y.name} au același preț')
-
-# print_product(new_product('mere', 8, 2))
+        print(f'Produsele {_x.name} și {_y.name} au același preț')
