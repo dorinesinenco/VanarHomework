@@ -1,5 +1,11 @@
 import json
 
+datadict = {
+    "manufacturer": "Audi",
+    "model": "RS6",
+    "year": 2021
+}
+
 
 class MemoryStorage:
     def __init__(self):
@@ -31,9 +37,6 @@ class FileStorage:
     def save_to_json(self, data):
         with open(self.name, 'w') as json_file:
             json.dump(data, json_file)
-        # file = open(self.jsonname, "a")
-        # file.write(data)
-        # file.close()
 
     def load_from_json(self):
         pass
@@ -58,12 +61,6 @@ class StorageProxy:
         if name == "save_to_json":
             return self.realStorage.save_to_json
 
-
-datadict = {
-    "manufacturer": "Audi",
-    "model": "RS6",
-    "year": 2021
-}
 
 storage = StorageProxy("memory")   # in memory
 storage.save("data in memory")
