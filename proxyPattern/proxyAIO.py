@@ -21,10 +21,9 @@ class MemoryStorage:
 class FileStorage:
     def __init__(self):
         self.name = "data.txt"
-        self.jsonname = "jsondata.json"
 
     def save(self, data):
-        file = open(self.name, "a")
+        file = open(self.name, "w")
         file.write(data)
         file.close()
 
@@ -34,13 +33,21 @@ class FileStorage:
         file.close()
         return data
 
-    def save_to_json(self, datadict):
+
+class JsonStorage():
+    def __init__(self):
+        self.name = "data.json"
+
+    def save(self, data):
         with open(self.name, 'w') as json_file:
-            json.dump(datadict, json_file)
+            json.dump(data, json_file)
         return json_file
 
-    def load_from_json(self):
-        pass
+    def load(self):
+        file = open(self.name, "r")
+        data = json.load(file)
+        file.close()
+        return data
 
 
 class StorageProxy:
@@ -49,18 +56,17 @@ class StorageProxy:
             self.realStorage = MemoryStorage()
         elif storageType == "file":
             self.realStorage = FileStorage()
-        elif storageType == "tojson":
-            self.realStorage = FileStorage()
+        elif storageType == "json":
+            self.realStorage = JsonStorage()
         else:
             raise Exception("Wrong storage type")
 
     def __getattr__(self, name):
+        print(name)
         if name == "load":
             return self.realStorage.load
         if name == "save":
             return self.realStorage.save
-        if name == "tojson":
-            return self.realStorage.save_to_json
 
 
 storage = StorageProxy("memory")   # in memory
@@ -71,6 +77,7 @@ print(storage.load())
 # storage.save("Test Data")
 # print(storage.load())
 
-storage = StorageProxy("tojson")   # in json file
-storage.save_to_json(datadict)
+storage = StorageProxy("json")   # in json file
+print(storage.realStorage)
+storage.save(datadict)
 # print(storage.load())
