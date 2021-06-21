@@ -37,6 +37,7 @@ class FileStorage:
     def save_to_json(self, datadict):
         with open(self.name, 'w') as json_file:
             json.dump(datadict, json_file)
+        return json_file
 
     def load_from_json(self):
         pass
